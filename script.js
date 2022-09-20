@@ -10,8 +10,8 @@ let passGen = {
   numeric: false,
   sym: false
 };
-// Character list
 
+// Character list
 const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const lower = 'abcdefghijklmnopqrstuvwxyz';
 const num = '0123456789';
@@ -26,43 +26,34 @@ function writePassword() {
 }
 
 // character functions
-
 function generatePassword() {
 
   // Ask for password criteria
   passGen.length = Number(prompt("choose a password length between 8 and 128"));
-    if (passGen.length < 8 || passGen.length >128) {
-      alert("Password length must be a number between 8 and 128!");
-      return generatePassword;
-    }
+  if (passGen.length < 8 || passGen.length >128) {
+    alert("Password length must be a number between 8 and 128!");
+    return generatePassword;
+  }
   passGen.lowercase = confirm("Include lower-case letters?");
-
   passGen.uppercase = confirm("Include upper-case letters?");
-
   passGen.numeric = confirm("Include numbers?");
-
   passGen.sym = confirm("Include special characters?");
-    // check if at least one character type was selected
-    if (passGen.lowercase == false && passGen.uppercase == false && passGen.numeric == false && passGen.sym == false) {
-      alert("Password must contain at least one character type!")
-      return generatePassword;
-    }
+  // check if at least one character type was selected
+  if (passGen.lowercase == false && passGen.uppercase == false && passGen.numeric == false && passGen.sym == false) {
+    alert("Password must contain at least one character type!")
+    return generatePassword;
+  }
+  // Call function
   charSelection();
-
+  //shuffle the generated password
   var shuffled = passResult.split('').sort(function(){
     return 0.5 - Math.random()
   }) .join('');
-  console.log('original:', passResult);
-  console.log('shuff:', shuffled);
   passResult = shuffled;
 }
 
-
 // Character Selection 
-
 function charSelection() {
-  console.log('start!')
-  console.log('passGen.length: ', passGen.length)
   for (passResult = '';  passResult.length < passGen.length;) {
     if (passGen.lowercase == true) {
       passResult += lower.charAt(Math.floor(Math.random() * lower.length));
